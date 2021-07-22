@@ -6,7 +6,7 @@ const contacts = require('./contacts.json')
 const listContacts = async () => {
   try {
     const data = await fs.readFile(pathContacts)
-    return JSON.parse(data)
+    return data
   } catch (e) {
     if (e) throw e
   }
