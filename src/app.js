@@ -2,8 +2,8 @@ const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
 
-const { HttpCode } = require('./helpers/constants')
-const contactsRouter = require('./routes/api/contacts')
+const { HttpCode } = require('./helpers')
+const contactsRouter = require('./api')
 
 const app = express()
 
@@ -35,5 +35,9 @@ app.use((err, req, res, next) => {
 })
 
 const PORT = process.env.PORT || 3000
-app.listen(PORT, () => { console.log(`Server running. Use ous API on port: ${PORT}`) })
+
+app.listen(PORT, () => {
+  console.log(`Server running. Use our API on port: ${PORT}`)
+})
+
 module.exports = app
