@@ -25,7 +25,7 @@ class ContactRepository {
     update(id, body) {
         const record = db.get('contacts').find({ id }).assign(body).value()
         db.write()
-        return record
+        return record.id ? record : null
     }
     remove(id) {
         const [record] = db.get('contacts').remove({ id }).write()
