@@ -1,33 +1,35 @@
-const { v4: uuid } = require('uuid')
-const db = require('../db')
+const { ObjectId } = require('mongodb')
 
 class ContactRepository {
-    constructor() { }
-    getAll() {
-        return db.get('contacts')
-            .value()
+    constructor(clientDB) {
+        const database = clientDB.db('GoIt')
+        this.collection = database.collection('contacts')
     }
-    getById(id) {
-        return db.get('contacts')
-            .find({ id })
-            .value()
+    async getAll() {
+        const result = await this.collection.find({}).toArray()
+        return result
     }
-    create(body) {
-        const id = uuid()
+    async getById(id) {
+        const objectId = ObjectId(id)
+        const [result] = await this.collection.find({ _id: objectId }).toArray()
+        return result
+
+    }
+    async create(body) {
         const record = {
-            id,
             ...body,
             ...(body.isVaccinated ? {} : { isVaccinated: false })
         }
-        db.get('contacts').push(record).write()
-        return record
+        const { ops: [result] } = await this.collection.insert(record)
+        console.log(result);
+        return result
     }
-    update(id, body) {
+    async update(id, body) {
         const record = db.get('contacts').find({ id }).assign(body).value()
         db.write()
         return record.id ? record : null
     }
-    remove(id) {
+    async remove(id) {
         const [record] = db.get('contacts').remove({ id }).write()
         return record
     }
