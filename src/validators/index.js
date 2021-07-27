@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const HttpCode = require('../helpers')
+const HttpCode = require('../helpers/constants')
 
 const schemaCreateContact = Joi.object({
     name: Joi.string().alphanum().min(3).max(100).required(),

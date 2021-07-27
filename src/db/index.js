@@ -1,9 +1,8 @@
 const { MongoClient } = require('mongodb')
-require('dotenv').config({ path: '../../.env' })
-const uriDb = "mongodb+srv://Pirogok0_0:Pirogok12345@myfreecluster.f3lsj.mongodb.net/test"
+require('dotenv').config()
+const uriDb = process.env.URI_DB
 
 const client = new MongoClient(uriDb, { useNewUrlParser: true, useUnifiedTopology: true }).connect()
-
 
 process.on('SIGINT', async () => {
     await client
