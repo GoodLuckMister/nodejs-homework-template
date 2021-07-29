@@ -7,7 +7,7 @@ router.get('/', controllerContacts.getAll)
   .get('/:id', controllerContacts.getById)
   .post('/', validateCreateContact, controllerContacts.create)
   .put('/:id', validateUpdateContact, controllerContacts.update)
-  .patch('/:id/isVaccinated', validateUpdateStatusContact, controllerContacts.updateStatus)
+  .patch('/:id/isVaccinated', validateUpdateStatusContact, controllerContacts.update)
   .delete('/:id', controllerContacts.remove)
 
 module.exports = router

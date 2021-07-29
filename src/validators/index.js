@@ -20,7 +20,7 @@ const schemaUpdateContact = Joi.object({
     job: Joi.object().optional()
 })
 
-const schemaStatusContact = Joi.object({ isVaccinated: Joi.boolean().optional() })
+const schemaStatusContact = Joi.object({ isVaccinated: Joi.boolean().required() })
 
 const validate = (schema, body, next) => {
     const { error } = schema.validate(body)

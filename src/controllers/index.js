@@ -1,3 +1,4 @@
+const { json } = require('express')
 const HttpCode = require('../helpers/constants')
 const { ContactService } = require('../services')
 
@@ -69,27 +70,7 @@ const update = async (req, res, next) => {
         next(e)
     }
 }
-const updateStatus = async (req, res, next) => {
-    try {
-        const contact = await contactsService.update(req.params, req.body)
-        if (contact) {
-            return res.status(HttpCode.OK).json({
-                status: 'success',
-                code: HttpCode.OK,
-                data: { contact }
-            })
-        } else {
-            return next({
-                status: HttpCode.NOT_FOUND,
-                message: 'Not found contact',
-                data: 'Not found',
-            })
-        }
 
-    } catch (e) {
-        next(e)
-    }
-}
 const remove = async (req, res, next) => {
     try {
         const contact = await contactsService.remove(req.params)
@@ -116,6 +97,5 @@ module.exports = {
     getById,
     create,
     update,
-    updateStatus,
     remove,
 }
