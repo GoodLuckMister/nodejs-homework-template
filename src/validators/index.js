@@ -2,17 +2,22 @@ const Joi = require('joi')
 const HttpCode = require('../helpers/constants')
 
 const schemaCreateContact = Joi.object({
-    name: Joi.string().alphanum().min(3).max(100).required(),
-    email: Joi.string().alphanum().min(9).max(100).required(),
+    name: Joi.string().min(3).max(100).required(),
+    email: Joi.string().min(9).max(100).required(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
-    isVaccinated: Joi.boolean().optional()
+    isVaccinated: Joi.boolean().optional(),
+    features: Joi.array().optional(),
+    job: Joi.object().optional()
+
 })
 
 const schemaUpdateContact = Joi.object({
     name: Joi.string().alphanum().min(3).max(100).optional(),
     email: Joi.string().alphanum().min(9).max(100).optional(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
-    isVaccinated: Joi.boolean().optional()
+    isVaccinated: Joi.boolean().optional(),
+    features: Joi.array().optional(),
+    job: Joi.object().optional()
 })
 
 const schemaStatusContact = Joi.object({ isVaccinated: Joi.boolean().optional() })
