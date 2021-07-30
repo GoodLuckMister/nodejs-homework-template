@@ -1,36 +1,38 @@
-const contact = require('../schema/contact')
+const { db } = require('../db')
 
 class ContactRepository {
     constructor() {
-        this.model = contact
+        this.db = db
     }
     async getAll() {
-        const result = await this.model.find({})
+        const result = await this.db.models.Contact.findAll({})
         return result
     }
 
     async getById(id) {
-        const result = await this.model.find({ _id: id })
+        const result = await this.db.models.Contact.findOne({ where: { id } })
         return result
     }
 
     async create(body) {
-        const result = await this.model.create(body)
+        const result = await this.db.models.Contact.create(body)
         return result
     }
 
     async update(id, body) {
-        const result = await this.model.findByIdAndUpdate(
-            { _id: id },
-            { ...body },
-            { new: true }
-        )
-        return result
+        const result = await this.db.models.Contact.findOne({ where: { id } })
+        if (!result) {
+            return null
+        }
+        return result.update(body)
     }
 
     async remove(id) {
-        const result = await this.model.findByIdAndDelete({ _id: id })
-        return result
+        const result = await this.db.models.Contact.findOne({ where: { id } })
+        if (!result) {
+            return null
+        }
+        return result.destroy()
     }
 }
 
