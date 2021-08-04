@@ -23,6 +23,11 @@ class UsersRepository {
         await this.model.updateOne({ _id: id }, { token })
     }
 
+    async getCurrentUser(token) {
+        const user = await this.model.findOne({ token })
+        return user
+    }
+
 }
 
 module.exports = UsersRepository

@@ -52,16 +52,47 @@ const login = async (req, res, next) => {
     }
 }
 const logout = async (req, res, next) => {
-    const id = req.user.id
-    await serviceAuth.logout(id)
-    return res.status(HttpCode.NO_CONTENT).json({
-        status: 'success',
-        code: HttpCode.NO_CONTENT
-    })
+    try {
+        const id = req.user.id
+        await serviceAuth.logout(id)
+        return res.status(HttpCode.NO_CONTENT).json({
+            status: 'success',
+            code: HttpCode.NO_CONTENT,
+            data: 'unauthorized'
+        })
+    } catch (e) {
+        next(e)
+    }
+
+}
+
+const getCurrentUser = async (req, res, next) => {
+    try {
+        const token = req.user.token
+        if (token) {
+            const { email, subscription } = await serviceUser.getCurrentUser(token)
+            return res.status(HttpCode.OK).json({
+                status: 'success',
+                code: HttpCode.OK,
+                data: {
+                    email,
+                    subscription
+                }
+            })
+        }
+        next({
+            status: HttpCode.UNAUTHORIZED,
+            message: 'Not authorized'
+        })
+    } catch (e) {
+        next(e)
+    }
+
 }
 
 module.exports = {
     reg,
     login,
-    logout
+    logout,
+    getCurrentUser
 }

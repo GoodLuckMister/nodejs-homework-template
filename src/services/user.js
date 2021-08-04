@@ -20,5 +20,9 @@ class UserService {
         const data = await this.repositories.users.findById(id)
         return data
     }
+    async getCurrentUser(token) {
+        const data = await this.repositories.users.getCurrentUser(token)
+        return data
+    }
 }
 module.exports = UserService
