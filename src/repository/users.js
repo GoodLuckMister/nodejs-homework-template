@@ -23,11 +23,14 @@ class UsersRepository {
         await this.model.updateOne({ _id: id }, { token })
     }
 
-    async getCurrentUser(token) {
-        const user = await this.model.findOne({ token })
-        return user
+    async updateSubscription(id, body) {
+        const result = await this.model.findByIdAndUpdate(
+            { _id: id },
+            { ...body },
+            { new: true }
+        )
+        return result
     }
-
 }
 
 module.exports = UsersRepository

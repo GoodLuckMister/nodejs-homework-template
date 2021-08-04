@@ -68,9 +68,9 @@ const logout = async (req, res, next) => {
 
 const getCurrentUser = async (req, res, next) => {
     try {
-        const token = req.user.token
-        if (token) {
-            const { email, subscription } = await serviceUser.getCurrentUser(token)
+        const id = req.user.id
+        if (id) {
+            const { email, subscription } = await serviceUser.findById(id)
             return res.status(HttpCode.OK).json({
                 status: 'success',
                 code: HttpCode.OK,
@@ -89,10 +89,41 @@ const getCurrentUser = async (req, res, next) => {
     }
 
 }
+const updateSubscription = async (req, res, next) => {
+    try {
+        const id = req.user.id
+        const { subscription } = req.body
+        if (!subscription) {
+            return next({
+                status: HttpCode.BAD_REQUEST,
+                message: '',
+                data: 'User did not update',
+            })
+        }
+        const user = await serviceUser.updateSubscription(id, req.body)
+        if (user) {
+            return res.status(HttpCode.OK).json({
+                status: 'success',
+                code: HttpCode.OK,
+                data: { user }
+            })
+        } else {
+            return next({
+                status: HttpCode.BAD_REQUEST,
+                message: 'Not found user',
+                data: 'User did not update',
+            })
+        }
+
+    } catch (e) {
+        next(e)
+    }
+}
 
 module.exports = {
     reg,
     login,
     logout,
-    getCurrentUser
+    getCurrentUser,
+    updateSubscription
 }

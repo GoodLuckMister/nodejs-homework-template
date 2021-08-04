@@ -9,8 +9,7 @@ router.get('/current', guard, controllerUser.getCurrentUser)
 router.post('/registration', createAccountLimiter, controllerUser.reg)
 router.post('/login', controllerUser.login)
 router.post('/logout', guard, controllerUser.logout)
-
-
+router.patch('/', guard, controllerUser.updateSubscription)
 
 
 module.exports = router
