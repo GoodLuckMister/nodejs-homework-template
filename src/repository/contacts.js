@@ -4,13 +4,30 @@ class ContactRepository {
     constructor() {
         this.model = Contact
     }
-    async getAll() {
-        const result = await this.model.find({})
-        return result
+    async getAll({ limit = 5, offset = 0, sortBy, sortByDesc, filter }) {
+        const { docs: contacts, totalDocs: total } = await this.model.paginate({},
+            {
+                limit,
+                offset,
+                sort: {
+                    ...(sortBy ? { [`${sortBy}`]: 1 } : {}),
+                    ...(sortByDesc ? { [`${sortByDesc}`]: -1 } : {}),
+                },
+                select: filter ? filter.split('|').join(' ') : '',
+                populate: {
+                    path: 'owner',
+                    select: 'name email subscription -_id'
+                }
+            }
+        )
+        return { contacts, total, limit: Number(limit), offset: Number(offset) }
     }
 
     async getById(id) {
-        const result = await this.model.find({ _id: id })
+        const result = await this.model.find({ _id: id }).populate({
+            path: 'owner',
+            select: 'name email subscription -_id'
+        })
         return result
     }
 

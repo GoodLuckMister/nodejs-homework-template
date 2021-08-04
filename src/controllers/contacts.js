@@ -6,11 +6,11 @@ const contactsService = new ContactService()
 
 const getAll = async (req, res, next) => {
     try {
-        const contacts = await contactsService.getAll()
+        const contacts = await contactsService.getAll(req.query)
         res.status(HttpCode.OK).json({
             status: 'success',
             code: HttpCode.OK,
-            data: { contacts }
+            data: { ...contacts }
         })
     } catch (e) {
         next(e)
