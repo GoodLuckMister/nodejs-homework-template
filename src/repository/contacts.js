@@ -4,8 +4,8 @@ class ContactRepository {
     constructor() {
         this.model = Contact
     }
-    async getAll({ limit = 5, offset = 0, sortBy, sortByDesc, filter }) {
-        const { docs: contacts, totalDocs: total } = await this.model.paginate({},
+    async getAll(userId, { limit = 5, offset = 0, sortBy, sortByDesc, filter }) {
+        const result = await this.model.paginate({ owner: userId },
             {
                 limit,
                 offset,
@@ -20,33 +20,33 @@ class ContactRepository {
                 }
             }
         )
-        return { contacts, total, limit: Number(limit), offset: Number(offset) }
+        return result
     }
 
-    async getById(id) {
-        const result = await this.model.find({ _id: id }).populate({
+    async getById(userId, id) {
+        const result = await this.model.find({ _id: id, owner: userId }).populate({
             path: 'owner',
             select: 'name email subscription -_id'
         })
         return result
     }
 
-    async create(body, userId) {
+    async create(userId, body) {
         const result = await this.model.create({ ...body, owner: userId })
         return result
     }
 
-    async update(id, body) {
+    async update(userId, id, body) {
         const result = await this.model.findByIdAndUpdate(
-            { _id: id },
+            { _id: id, owner: userId },
             { ...body },
             { new: true }
         )
         return result
     }
 
-    async remove(id) {
-        const result = await this.model.findByIdAndDelete({ _id: id })
+    async remove(userId, id) {
+        const result = await this.model.findByIdAndDelete({ _id: id, owner: userId })
         return result
     }
 }

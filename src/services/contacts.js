@@ -6,24 +6,25 @@ class ContactService {
             contacts: new ContactRepository()
         }
     }
-    async getAll(query) {
-        const data = await this.repositories.contacts.getAll(query)
+    async getAll(userId, query) {
+        const data = await this.repositories.contacts.getAll(userId, query)
+        const { docs: contacts, totalDocs: total, limit, offset } = data
+        return { contacts, total, limit, offset }
+    }
+    async getById(userId, { id }) {
+        const data = await this.repositories.contacts.getById(userId, id)
         return data
     }
-    async getById({ id }) {
-        const data = await this.repositories.contacts.getById(id)
+    async create(userId, body) {
+        const data = await this.repositories.contacts.create(userId, body)
         return data
     }
-    async create(body, userId) {
-        const data = await this.repositories.contacts.create(body, userId)
+    async update(userId, { id }, body) {
+        const data = await this.repositories.contacts.update(userId, id, body)
         return data
     }
-    async update({ id }, body) {
-        const data = await this.repositories.contacts.update(id, body)
-        return data
-    }
-    async remove({ id }) {
-        const data = await this.repositories.contacts.remove(id)
+    async remove(userId, { id }) {
+        const data = await this.repositories.contacts.remove(userId, id)
         return data
     }
 
