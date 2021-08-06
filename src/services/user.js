@@ -22,7 +22,8 @@ class UserService {
     }
     async updateSubscription(id, body) {
         const data = await this.repositories.users.updateSubscription(id, body)
-        return data
+        const { name, email, subscription } = data
+        return { name, email, subscription }
     }
 }
 module.exports = UserService

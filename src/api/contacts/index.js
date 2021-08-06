@@ -1,8 +1,9 @@
 const express = require('express')
 const controllerContacts = require('../../controllers/contacts')
-const router = express.Router()
-const { validateCreateContact, validateUpdateContact, validateUpdateStatusContact } = require('../../validators')
+const { validateCreateContact, validateUpdateContact, validateUpdateStatusContact } = require('../../validators/contacts')
 const guard = require('../../helpers/guard')
+
+const router = express.Router()
 
 router.get('/', guard, controllerContacts.getAll)
     .get('/:id', guard, controllerContacts.getById)
