@@ -1,5 +1,5 @@
 const { AuthService, UserService } = require('../services')
-const { HttpCode } = require('../helpers/constants')
+const { HttpCode, SubScribe } = require('../helpers/constants')
 
 const serviceUser = new UserService()
 const serviceAuth = new AuthService()
@@ -96,7 +96,7 @@ const updateSubscription = async (req, res, next) => {
         if (!subscription) {
             return next({
                 status: HttpCode.BAD_REQUEST,
-                message: '',
+                message: 'Subscription must be starter , pro, business',
                 data: 'User did not update',
             })
         }

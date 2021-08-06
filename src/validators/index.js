@@ -5,16 +5,19 @@ const schemaCreateContact = Joi.object({
     name: Joi.string().min(3).max(100).required(),
     email: Joi.string().min(9).max(100).required(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
+    features: Joi.array().optional(),
     favorite: Joi.boolean().optional(),
-    features: Joi.array().optional()
+    owner: Joi.string().required()
 })
 
 const schemaUpdateContact = Joi.object({
     name: Joi.string().alphanum().min(3).max(100).optional(),
     email: Joi.string().alphanum().min(9).max(100).optional(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
+    features: Joi.array().optional(),
     favorite: Joi.boolean().optional(),
-    features: Joi.array().optional()
+    owner: Joi.string().optional()
+
 })
 
 const schemaStatusContact = Joi.object({ favorite: Joi.boolean().required() })

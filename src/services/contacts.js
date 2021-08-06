@@ -8,8 +8,8 @@ class ContactService {
     }
     async getAll(userId, query) {
         const data = await this.repositories.contacts.getAll(userId, query)
-        const { docs: contacts, totalDocs: total, limit, offset } = data
-        return { contacts, total, limit, offset }
+        const { page, docs: contacts, totalDocs: total, limit } = data
+        return { contacts, page, limit, total }
     }
     async getById(userId, { id }) {
         const data = await this.repositories.contacts.getById(userId, id)
