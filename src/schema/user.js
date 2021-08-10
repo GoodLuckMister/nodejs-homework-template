@@ -25,10 +25,7 @@ const userSchema = new Schema({
     },
     subscription: {
         type: String,
-        enum: {
-            values: [SubScribe.STARTER, SubScribe.PRO, SubScribe.BUSINESS],
-            message: 'This Subscription type is not defined'
-        },
+        enum: [SubScribe.STARTER, SubScribe.PRO, SubScribe.BUSINESS],
         default: SubScribe.STARTER
     },
     token: {

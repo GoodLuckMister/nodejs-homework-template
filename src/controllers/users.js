@@ -70,11 +70,12 @@ const getCurrentUser = async (req, res, next) => {
     try {
         const id = req.user.id
         if (id) {
-            const { email, subscription } = await serviceUser.findById(id)
+            const { name, email, subscription } = await serviceUser.findById(id)
             return res.status(HttpCode.OK).json({
                 status: 'success',
                 code: HttpCode.OK,
                 data: {
+                    name,
                     email,
                     subscription
                 }
@@ -92,14 +93,6 @@ const getCurrentUser = async (req, res, next) => {
 const updateSubscription = async (req, res, next) => {
     try {
         const id = req.user.id
-        const { subscription } = req.body
-        if (!subscription) {
-            return next({
-                status: HttpCode.BAD_REQUEST,
-                message: 'Subscription must be starter , pro, business',
-                data: 'User did not update',
-            })
-        }
         const user = await serviceUser.updateSubscription(id, req.body)
         if (user) {
             return res.status(HttpCode.OK).json({
@@ -108,6 +101,7 @@ const updateSubscription = async (req, res, next) => {
                 data: { user }
             })
         } else {
+
             return next({
                 status: HttpCode.BAD_REQUEST,
                 message: 'Not found user',
