@@ -2,15 +2,15 @@ const Joi = require('joi')
 const HttpCode = require('../helpers')
 
 const schemaCreateContact = Joi.object({
-    name: Joi.string().alphanum().min(3).max(100).required(),
-    email: Joi.string().alphanum().min(9).max(100).required(),
+    name: Joi.string().min(3).max(100).required(),
+    email: Joi.string().min(9).max(100).required(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
     isVaccinated: Joi.boolean().optional()
 })
 
 const schemaUpdateContact = Joi.object({
-    name: Joi.string().alphanum().min(3).max(100).optional(),
-    email: Joi.string().alphanum().min(9).max(100).optional(),
+    name: Joi.string().min(3).max(100).optional(),
+    email: Joi.string().min(9).max(100).optional(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
     isVaccinated: Joi.boolean().optional()
 })

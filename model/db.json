@@ -29,6 +29,12 @@
       "name": "lambotass  asdcadc",
       "email": "Ganana@nanananMail.com",
       "isVaccinated": false
+    },
+    {
+      "id": "cc081fe6-201c-4db2-bc23-8c35072e7b5b",
+      "name": "Shallow",
+      "email": "shalow@mail.com",
+      "isVaccinated": false
     }
   ]
 }
