@@ -2,7 +2,9 @@ const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
 
-const { HttpCode } = require('./helpers/constants')
+
+const { HttpCode } = require('./helpers')
+
 const contactsRouter = require('./api')
 
 const app = express()
@@ -32,6 +34,12 @@ app.use((err, req, res, next) => {
     message: err.message,
     data: err.status === 500 ? 'Internal server error' : err.data,
   })
+})
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => {
+  console.log(`Server running. Use our API on port: ${PORT}`)
 })
 
 module.exports = app
