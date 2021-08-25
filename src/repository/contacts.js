@@ -1,35 +1,36 @@
-const { v4: uuid } = require('uuid')
-const db = require('../db')
+const contact = require('../schema/contact')
 
 class ContactRepository {
-    constructor() { }
-    getAll() {
-        return db.get('contacts')
-            .value()
+    constructor() {
+        this.model = contact
     }
-    getById(id) {
-        return db.get('contacts')
-            .find({ id })
-            .value()
+    async getAll() {
+        const result = await this.model.find({})
+        return result
     }
-    create(body) {
-        const id = uuid()
-        const record = {
-            id,
-            ...body,
-            ...(body.isVaccinated ? {} : { isVaccinated: false })
-        }
-        db.get('contacts').push(record).write()
-        return record
+
+    async getById(id) {
+        const result = await this.model.find({ _id: id })
+        return result
     }
-    update(id, body) {
-        const record = db.get('contacts').find({ id }).assign(body).value()
-        db.write()
-        return record.id ? record : null
+
+    async create(body) {
+        const result = await this.model.create(body)
+        return result
     }
-    remove(id) {
-        const [record] = db.get('contacts').remove({ id }).write()
-        return record
+
+    async update(id, body) {
+        const result = await this.model.findByIdAndUpdate(
+            { _id: id },
+            { ...body },
+            { new: true }
+        )
+        return result
+    }
+
+    async remove(id) {
+        const result = await this.model.findByIdAndDelete({ _id: id })
+        return result
     }
 }
 module.exports = ContactRepository
