@@ -16,6 +16,10 @@ const contactSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    favorite: {
+        type: Boolean,
+        default: false,
+    },
     features: {
         type: Array,
         set: (data) => (!data ? [] : data)

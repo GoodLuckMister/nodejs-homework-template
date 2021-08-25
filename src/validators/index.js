@@ -6,6 +6,7 @@ const schemaCreateContact = Joi.object({
     email: Joi.string().min(9).max(100).required(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
     isVaccinated: Joi.boolean().optional(),
+    favorite: Joi.boolean().optional(),
     features: Joi.array().optional(),
     job: Joi.object().optional()
 
@@ -16,11 +17,14 @@ const schemaUpdateContact = Joi.object({
     email: Joi.string().alphanum().min(9).max(100).optional(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
     isVaccinated: Joi.boolean().optional(),
+    favorite: Joi.boolean().optional(),
     features: Joi.array().optional(),
     job: Joi.object().optional()
 })
 
 const schemaStatusContact = Joi.object({ isVaccinated: Joi.boolean().required() })
+
+const schemaUpdateFavorite = Joi.object({ favorite: Joi.boolean().required() })
 
 const validate = (schema, body, next) => {
     const { error } = schema.validate(body)
@@ -43,4 +47,7 @@ module.exports.validateUpdateContact = (req, res, next) => {
 }
 module.exports.validateUpdateStatusContact = (req, res, next) => {
     return validate(schemaStatusContact, req.body, next)
+}
+module.exports.validateUpdateFavoriteContact = (req, res, next) => {
+    return validate(schemaUpdateFavorite, req.body, next)
 }
