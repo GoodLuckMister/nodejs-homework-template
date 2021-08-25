@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const { HttpCode, SubScribe } = require('../helpers/constants')
+const { HttpCode } = require('../helpers/constants')
 
 
 const schemaCreateContact = Joi.object({
@@ -23,6 +23,7 @@ const schemaUpdateContact = Joi.object({
 
 const schemaStatusContact = Joi.object({ favorite: Joi.boolean().required() })
 
+
 const validate = (schema, body, next) => {
     const { error } = schema.validate(body)
     if (error) {
@@ -45,12 +46,9 @@ const validateUpdateContact = (req, res, next) => {
 const validateUpdateStatusContact = (req, res, next) => {
     return validate(schemaStatusContact, req.body, next)
 }
-const validateUpdateStatusSubscribe = (req, res, next) => {
-    return validate(schemaUpdateSubscribe, req.body, next)
-}
+
 module.exports = {
     validateCreateContact,
     validateUpdateContact,
     validateUpdateStatusContact,
-    validateUpdateStatusSubscribe
 }
