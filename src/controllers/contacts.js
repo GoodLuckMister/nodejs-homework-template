@@ -5,8 +5,10 @@ const contactsService = new ContactService()
 
 const getAll = async (req, res, next) => {
     try {
+
         const userId = req.user.id
         const contacts = await contactsService.getAll(userId, req.query)
+
         res.status(HttpCode.OK).json({
             status: 'success',
             code: HttpCode.OK,
@@ -16,6 +18,7 @@ const getAll = async (req, res, next) => {
         next(e)
     }
 }
+
 
 const getById = async (req, res, next) => {
     try {
@@ -40,10 +43,12 @@ const getById = async (req, res, next) => {
     }
 }
 
+
 const create = async (req, res, next) => {
     try {
         const userId = req.user.id
         const contact = await contactsService.create(userId, req.body)
+
         res.status(HttpCode.OK).json({
             status: 'success',
             code: HttpCode.CREATED,
@@ -77,6 +82,7 @@ const update = async (req, res, next) => {
         next(e)
     }
 }
+
 
 const remove = async (req, res, next) => {
     try {

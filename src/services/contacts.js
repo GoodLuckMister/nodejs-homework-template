@@ -1,4 +1,5 @@
 const { ContactRepository } = require('../repository')
+const db = require('../db')
 
 class ContactService {
     constructor() {
@@ -25,6 +26,7 @@ class ContactService {
     }
     async remove(userId, { id }) {
         const data = await this.repositories.contacts.remove(userId, id)
+
         return data
     }
 

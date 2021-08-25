@@ -19,5 +19,3 @@ const SubScribe = {
 
 module.exports = { HttpCode, SubScribe }
 
-
-
