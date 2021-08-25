@@ -16,6 +16,7 @@ const getAll = async (req, res, next) => {
         next(e)
     }
 }
+
 const getById = async (req, res, next) => {
     try {
         const userId = req.user.id
@@ -38,6 +39,7 @@ const getById = async (req, res, next) => {
         next(e)
     }
 }
+
 const create = async (req, res, next) => {
     try {
         const userId = req.user.id
@@ -51,10 +53,12 @@ const create = async (req, res, next) => {
         next(e)
     }
 }
+
 const update = async (req, res, next) => {
     try {
         const userId = req.user.id
         const contact = await contactsService.update(userId, req.params, req.body)
+
         if (contact) {
             return res.status(HttpCode.OK).json({
                 status: 'success',

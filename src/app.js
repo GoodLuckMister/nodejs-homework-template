@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
+
 const helmet = require('helmet')
 const rateLimit = require("express-rate-limit")
 
@@ -10,9 +11,11 @@ const { ErrorHandler } = require('./helpers/errorhandler')
 const contactsRouter = require('./api/contacts')
 const usersRouter = require('./api/users')
 
+
 const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
+
 
 app.use(helmet())
 app.use(logger(formatsLogger))
@@ -32,6 +35,7 @@ app.use("/api/", rateLimit({
   }
 }))
 app.use('/api/users', usersRouter)
+
 app.use('/api/contacts', contactsRouter)
 
 app.use((req, res) => {
@@ -52,5 +56,6 @@ app.use((err, req, res, next) => {
     data: err.status === 500 ? 'Internal server error' : err.data,
   })
 })
+
 
 module.exports = app

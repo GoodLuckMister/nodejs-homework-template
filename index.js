@@ -1,9 +1,10 @@
 const app = require('./src/app')
-const db = require('./src/db')
+
+const client = require('./src/db')
 
 const PORT = process.env.PORT || 3000
 
-db.then(() => {
+client.then(() => {
     app.listen(PORT, () => {
         console.log(`Server running. Use our API on port: ${PORT}`)
     })

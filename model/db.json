@@ -1,0 +1,40 @@
+{
+  "contacts": [
+    {
+      "id": "062b2a18-fa2c-42e4-be35-a3baf476f442",
+      "name": "hahahahaha",
+      "email": "nananan",
+      "isVaccinated": true
+    },
+    {
+      "id": "339cf960-9b5b-414f-9178-1d1ddedfa243",
+      "name": "antonio Ferrary",
+      "email": "mail.ferary",
+      "isVaccinated": true
+    },
+    {
+      "id": "48c5ed87-c902-4f92-a7a2-730d31da8eca",
+      "name": "antonio Lamborginy",
+      "email": "mail.ferary",
+      "isVaccinated": false
+    },
+    {
+      "id": "ed5147ce-52ad-41d9-8775-f8775df3e837",
+      "name": "antonio L434242224borginy",
+      "email": "mail.fssdsdy",
+      "isVaccinated": false
+    },
+    {
+      "id": "de40394c-ba6d-462b-b7c8-b84679535306",
+      "name": "lambotass  asdcadc",
+      "email": "Ganana@nanananMail.com",
+      "isVaccinated": false
+    },
+    {
+      "id": "cc081fe6-201c-4db2-bc23-8c35072e7b5b",
+      "name": "Shallow",
+      "email": "shalow@mail.com",
+      "isVaccinated": false
+    }
+  ]
+}
