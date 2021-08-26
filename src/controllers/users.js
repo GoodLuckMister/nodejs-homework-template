@@ -1,6 +1,6 @@
 const fs = require('fs/promises')
-// const path = require('path')
-// require('dotenv').config()
+const path = require('path')
+require('dotenv').config()
 const { AuthService, UserService, UploadAvatarService } = require('../services')
 const { UsersRepository } = require('../repository')
 const { HttpCode } = require('../helpers/constants')
@@ -123,9 +123,7 @@ const updateSubscription = async (req, res, next) => {
     }
 }
 
-/** Local upload
- * 
- * 
+
 const avatars = async (req, res, next) => {
     try {
         const id = req.user.id
@@ -149,7 +147,9 @@ const avatars = async (req, res, next) => {
     }
 
 }
-*/
+
+
+/* Cloudinary upload
 
 const avatars = async (req, res, next) => {
     try {
@@ -173,6 +173,7 @@ const avatars = async (req, res, next) => {
     }
 
 }
+*/
 
 module.exports = {
     reg,
