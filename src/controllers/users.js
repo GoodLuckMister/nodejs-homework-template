@@ -1,9 +1,10 @@
 const fs = require('fs/promises')
-const path = require('path')
+// const path = require('path')
+// require('dotenv').config()
 const { AuthService, UserService, UploadAvatarService } = require('../services')
 const { UsersRepository } = require('../repository')
 const { HttpCode } = require('../helpers/constants')
-require('dotenv').config()
+
 
 
 const serviceUser = new UserService()
@@ -122,19 +123,44 @@ const updateSubscription = async (req, res, next) => {
     }
 }
 
+/** Local upload
+ * 
+ * 
 const avatars = async (req, res, next) => {
     try {
         const id = req.user.id
         const uploads = new UploadAvatarService(process.env.AVATAR_OF_USERS)
         const avatarUrl = await uploads.saveAvatar({ idUser: id, file: req.file })
-        // TODO need delete old avatar
-
         try {
             await fs.unlink(path.join(process.env.AVATAR_OF_USERS, req.user.avatar))
         } catch (e) {
             console.log(e.message)
         }
         await new UsersRepository().updateAvatar(id, avatarUrl)
+        res.json({
+            status: 'success',
+            code: HttpCode.OK,
+            data: {
+                avatarUrl
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+
+}
+*/
+
+const avatars = async (req, res, next) => {
+    try {
+        const id = req.user.id
+        const uploads = new UploadAvatarService()
+        const { idCloudAvatar, avatarUrl } = await uploads.saveAvatar(
+            req.file.path,
+            req.user.idCloudAvatar)
+
+        await fs.unlink(req.file.path)
+        await new UsersRepository().updateAvatar(id, avatarUrl, idCloudAvatar)
         res.json({
             status: 'success',
             code: HttpCode.OK,

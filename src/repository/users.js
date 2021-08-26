@@ -33,8 +33,8 @@ class UsersRepository {
         return result
     }
 
-    async updateAvatar(id, avatar) {
-        return await this.Model.updateOne({ _id: id }, { avatar })
+    async updateAvatar(id, avatar, idCloudAvatar = null) {
+        return await this.Model.updateOne({ _id: id }, { avatar, idCloudAvatar })
     }
 }
 
