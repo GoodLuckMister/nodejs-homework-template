@@ -16,10 +16,12 @@ class UserService {
         const data = await this.repositories.users.findByEmail(email)
         return data
     }
+
     async findById(id) {
         const data = await this.repositories.users.findById(id)
         return data
     }
+
     async updateSubscription(id, body) {
         const data = await this.repositories.users.updateSubscription(id, body)
         const { name, email, subscription } = data

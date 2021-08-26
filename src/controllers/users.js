@@ -1,5 +1,5 @@
 const { AuthService, UserService } = require('../services')
-const { HttpCode, SubScribe } = require('../helpers/constants')
+const { HttpCode } = require('../helpers/constants')
 
 const serviceUser = new UserService()
 const serviceAuth = new AuthService()

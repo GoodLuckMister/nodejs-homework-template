@@ -24,7 +24,7 @@ app.use(cors())
 app.use(express.json({ limit: jsonLimit }))
 
 app.use("/api/", rateLimit({
-  windowMs: apiLimit.windowMs, //15 minutes
+  windowMs: apiLimit.windowMs,
   max: apiLimit.max,
   handler: (req, res, next) => {
     next(

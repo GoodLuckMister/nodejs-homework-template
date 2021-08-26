@@ -4,6 +4,7 @@ class ContactRepository {
     constructor() {
         this.model = Contact
     }
+
     async getAll(userId, { limit = 5, page = 1, sortBy, sortByDesc, filter, favorite }) {
         const result = await this.model.paginate({
             ...(favorite ? { favorite } : {}), owner: userId
@@ -24,6 +25,7 @@ class ContactRepository {
         )
         return result
     }
+
     async getById(userId, id) {
         const result = await this.model.find({ _id: id, owner: userId }).populate({
             path: 'owner',
