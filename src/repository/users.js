@@ -32,6 +32,10 @@ class UsersRepository {
         )
         return result
     }
+
+    async updateAvatar(id, avatar) {
+        return await this.Model.updateOne({ _id: id }, { avatar })
+    }
 }
 
 module.exports = UsersRepository
