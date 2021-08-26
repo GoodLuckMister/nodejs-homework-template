@@ -4,6 +4,7 @@ class ContactRepository {
     constructor() {
         this.model = contact
     }
+
     async getAll() {
         const result = await this.model.find({})
         return result
