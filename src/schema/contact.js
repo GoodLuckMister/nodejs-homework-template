@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose
+const mongoose = require('mongoose')
+const { Schema, SchemaTypes } = mongoose
+const mongoosePaginate = require('mongoose-paginate-v2')
+
 
 const contactSchema = new Schema({
     name: {
@@ -12,10 +14,6 @@ const contactSchema = new Schema({
     phone: {
         type: String,
     },
-    isVaccinated: {
-        type: Boolean,
-        default: false,
-    },
     favorite: {
         type: Boolean,
         default: false,
@@ -24,7 +22,10 @@ const contactSchema = new Schema({
         type: Array,
         set: (data) => (!data ? [] : data)
     },
-    job: { position: String, age: Number }
+    owner: {
+        type: SchemaTypes.ObjectId,
+        ref: 'user',
+    }
 },
     {
         versionKey: false,
@@ -32,7 +33,10 @@ const contactSchema = new Schema({
     }
 )
 
-const contact = mongoose.model('contact', contactSchema);
+contactSchema.plugin(mongoosePaginate)
 
-module.exports = contact
+const Contact = mongoose.model('contact', contactSchema)
+
+module.exports = Contact
+
 

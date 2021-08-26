@@ -2,7 +2,6 @@ const { getAll,
     getById,
     create,
     update,
-    updateStatus,
     remove } = require('./contacts')
 
 
@@ -11,6 +10,5 @@ module.exports = {
     getById,
     create,
     update,
-    updateStatus,
     remove,
 }

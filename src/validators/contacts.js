@@ -1,30 +1,28 @@
 const Joi = require('joi')
-const HttpCode = require('../helpers/constants')
+const { HttpCode } = require('../helpers/constants')
+
 
 const schemaCreateContact = Joi.object({
     name: Joi.string().min(3).max(100).required(),
     email: Joi.string().min(9).max(100).required(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
-    isVaccinated: Joi.boolean().optional(),
-    favorite: Joi.boolean().optional(),
     features: Joi.array().optional(),
-    job: Joi.object().optional()
-
+    favorite: Joi.boolean().optional(),
+    owner: Joi.string().optional()
 })
 
 const schemaUpdateContact = Joi.object({
     name: Joi.string().alphanum().min(3).max(100).optional(),
     email: Joi.string().alphanum().min(9).max(100).optional(),
     phone: Joi.string().alphanum().min(12).max(15).optional(),
-    isVaccinated: Joi.boolean().optional(),
-    favorite: Joi.boolean().optional(),
     features: Joi.array().optional(),
-    job: Joi.object().optional()
+    favorite: Joi.boolean().optional(),
+    owner: Joi.string().optional()
+
 })
 
-const schemaStatusContact = Joi.object({ isVaccinated: Joi.boolean().required() })
+const schemaStatusContact = Joi.object({ favorite: Joi.boolean().required() })
 
-const schemaUpdateFavorite = Joi.object({ favorite: Joi.boolean().required() })
 
 const validate = (schema, body, next) => {
     const { error } = schema.validate(body)
@@ -39,15 +37,22 @@ const validate = (schema, body, next) => {
     next()
 }
 
-module.exports.validateCreateContact = (req, res, next) => {
+
+const validateCreateContact = (req, res, next) => {
     return validate(schemaCreateContact, req.body, next)
 }
-module.exports.validateUpdateContact = (req, res, next) => {
+const validateUpdateContact = (req, res, next) => {
     return validate(schemaUpdateContact, req.body, next)
 }
-module.exports.validateUpdateStatusContact = (req, res, next) => {
+const validateUpdateStatusContact = (req, res, next) => {
     return validate(schemaStatusContact, req.body, next)
 }
-module.exports.validateUpdateFavoriteContact = (req, res, next) => {
-    return validate(schemaUpdateFavorite, req.body, next)
+
+
+module.exports = {
+    validateCreateContact,
+    validateUpdateContact,
+    validateUpdateStatusContact,
 }
+
+
