@@ -9,6 +9,8 @@ const { HttpCode } = require('../helpers/constants')
 
 const serviceUser = new UserService()
 const serviceAuth = new AuthService()
+const STATIC_OF_USERS = process.env.STATIC_OF_USERS
+const AVATARS = process.env.AVATARS
 
 
 
@@ -78,15 +80,15 @@ const getCurrentUser = async (req, res, next) => {
     try {
         const id = req.user.id
         if (id) {
-            const { name, email, subscription, avatar } = await serviceUser.findById(id)
+            const { name, email, subscription, avatarURL } = await serviceUser.findById(id)
             return res.status(HttpCode.OK).json({
                 status: 'success',
                 code: HttpCode.OK,
                 data: {
                     name,
                     email,
-                    avatar,
-                    subscription
+                    subscription,
+                    avatarURL
                 }
             })
         }
@@ -127,10 +129,10 @@ const updateSubscription = async (req, res, next) => {
 const avatars = async (req, res, next) => {
     try {
         const id = req.user.id
-        const uploads = new UploadAvatarService(process.env.AVATAR_OF_USERS)
+        const uploads = new UploadAvatarService(path.join(STATIC_OF_USERS, AVATARS))
         const avatarUrl = await uploads.saveAvatar({ idUser: id, file: req.file })
         try {
-            await fs.unlink(path.join(process.env.AVATAR_OF_USERS, req.user.avatar))
+            await fs.unlink(path.join(STATIC_OF_USERS, AVATARS, req.user.avatar))
         } catch (e) {
             console.log(e.message)
         }

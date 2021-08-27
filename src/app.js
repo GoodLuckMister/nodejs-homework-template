@@ -10,7 +10,8 @@ const { ErrorHandler } = require('./helpers/errorhandler')
 const contactsRouter = require('./api/contacts')
 const usersRouter = require('./api/users')
 require('dotenv').config()
-const AVATAR_OF_USERS = process.env.AVATAR_OF_USERS
+const STATIC_OF_USERS = process.env.STATIC_OF_USERS
+const AVATARS = process.env.AVATARS
 
 
 const app = express()
@@ -18,7 +19,7 @@ const app = express()
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
 app.use(helmet())
-app.use(express.static(path.join(__dirname, '..', AVATAR_OF_USERS)))
+app.use(`/${AVATARS}`, express.static(path.join(__dirname, '..', STATIC_OF_USERS, AVATARS)))
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json({ limit: jsonLimit }))
