@@ -58,5 +58,15 @@ describe('Test rout contacts', () => {
         })
         it('should return status 404 get contact wrong id', async () => { })
     })
-    describe('POST request', () => { })
+    describe('POST request', () => {
+        it('should return status 201 create contact', async () => {
+            const response = await request(app)
+                .post('/api/contacts')
+                .set('Authorization', `Bearer ${token}`)
+                .send(newContact)
+                .set('Accept', 'application.json')
+            expect(response.status).toEqual(201)
+            expect(response.body).toBeDefined()
+        })
+    })
 })

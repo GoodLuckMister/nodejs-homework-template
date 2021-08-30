@@ -12,7 +12,7 @@ const newTestUser = {
     name: 'Alexander',
     email: 'new_alex@mail.com',
     password: '12345',
-    subscribe: 'business'
+    subscription: 'business'
 }
 module.exports = {
     newContact,

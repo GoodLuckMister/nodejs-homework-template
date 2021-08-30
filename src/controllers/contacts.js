@@ -44,7 +44,7 @@ const create = async (req, res, next) => {
         const userId = req.user.id
         const contact = await contactsService.create(userId, req.body)
 
-        res.status(HttpCode.OK).json({
+        res.status(HttpCode.CREATED).json({
             status: 'success',
             code: HttpCode.CREATED,
             data: { contact }
