@@ -1,9 +1,11 @@
+
 const { Schema, model } = require('mongoose')
 const bcrypt = require('bcryptjs')
 const { SubScribe } = require('../helpers/constants')
 const gr = require('gravatar')
 
 const SALT_FACTOR = 6
+
 
 const userSchema = new Schema({
     name: {
@@ -43,6 +45,7 @@ const userSchema = new Schema({
         type: String,
         default: null
     }
+
 },
     {
         versionKey: false,
@@ -68,7 +71,9 @@ userSchema.methods.validPassword = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
+
 const User = model('user', userSchema);
+
 
 module.exports = User
 

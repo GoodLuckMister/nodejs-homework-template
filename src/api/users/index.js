@@ -5,7 +5,6 @@ const createAccountLimiter = require('../../helpers/rate-limit')
 const { validateUpdateUser } = require('../../validators/user')
 const upload = require('../../helpers/upload')
 
-
 const router = express.Router()
 
 router.get('/current', guard, controllerUser.getCurrentUser)
@@ -14,6 +13,7 @@ router.post('/login', controllerUser.login)
 router.post('/logout', guard, controllerUser.logout)
 router.patch('/', guard, validateUpdateUser, controllerUser.updateSubscription)
 router.patch('/avatars', guard, upload.single('avatar'), controllerUser.avatars)
+
 
 
 module.exports = router

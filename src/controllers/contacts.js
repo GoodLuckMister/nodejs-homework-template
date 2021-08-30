@@ -29,6 +29,7 @@ const getById = async (req, res, next) => {
             code: HttpCode.OK,
             data: { contact }
         })
+
     } catch (e) {
         next({
             status: HttpCode.NOT_FOUND,
@@ -43,8 +44,7 @@ const create = async (req, res, next) => {
     try {
         const userId = req.user.id
         const contact = await contactsService.create(userId, req.body)
-
-        res.status(HttpCode.CREATED).json({
+        return res.status(HttpCode.CREATED).json({
             status: 'success',
             code: HttpCode.CREATED,
             data: { contact }

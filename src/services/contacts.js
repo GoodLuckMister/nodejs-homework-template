@@ -30,7 +30,6 @@ class ContactService {
 
     async remove(userId, { id }) {
         const data = await this.repositories.contacts.remove(userId, id)
-
         return data
     }
 

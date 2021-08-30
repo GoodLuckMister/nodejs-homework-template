@@ -14,6 +14,7 @@ const AVATARS = process.env.AVATARS
 
 
 
+
 const reg = async (req, res, next) => {
     const { name, email, password, subscription } = req.body
     const user = await serviceUser.findByEmail(email)
@@ -80,7 +81,9 @@ const getCurrentUser = async (req, res, next) => {
     try {
         const id = req.user.id
         if (id) {
+
             const { name, email, subscription, avatarURL } = await serviceUser.findById(id)
+
             return res.status(HttpCode.OK).json({
                 status: 'success',
                 code: HttpCode.OK,
