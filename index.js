@@ -4,8 +4,10 @@ const createFolderIsNotExist = require('./src/helpers/create-folder')
 const path = require('path')
 require('dotenv').config()
 
+
 const PORT = process.env.PORT || 3000
 const UPLOAD_DIR = process.env.UPLOAD_DIR
+
 const STATIC_OF_USERS = process.env.STATIC_OF_USERS
 const AVATARS = process.env.AVATARS
 
