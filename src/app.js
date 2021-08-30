@@ -1,16 +1,18 @@
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-
+const path = require('path')
 const helmet = require('helmet')
 const rateLimit = require("express-rate-limit")
-
 const { HttpCode } = require('./helpers/constants')
 const { apiLimit, jsonLimit } = require('./config/rate-limit.json')
 const { ErrorHandler } = require('./helpers/errorhandler')
 const contactsRouter = require('./api/contacts')
 const usersRouter = require('./api/users')
 
+require('dotenv').config()
+const STATIC_OF_USERS = process.env.STATIC_OF_USERS
+const AVATARS = process.env.AVATARS
 
 
 const app = express()
@@ -19,7 +21,8 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
 
 app.use(helmet())
-app.use(logger(formatsLogger))
+app.use(`/${AVATARS}`, express.static(path.join(__dirname, '..', STATIC_OF_USERS, AVATARS)))
+app.get('env') !== 'test' && app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json({ limit: jsonLimit }))
 
