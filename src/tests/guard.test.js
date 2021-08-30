@@ -33,4 +33,18 @@ describe('Unit test controller contacts', () => {
             message: 'Invalid credentials'
         })
     })
+    it('user token wrong', async () => {
+        passport.authenticate = jest.fn((strategy, options, cb) => () => {
+            cb(null, { token: '34555432323' })
+        })
+        guard(req, res, next)
+        expect(req.get).toHaveBeenCalled()
+        expect(res.status).toHaveBeenCalled()
+        expect(res.json).toHaveBeenCalled()
+        expect(res.json).toHaveReturnedWith({
+            status: 'error',
+            code: HttpCode.UNAUTHORIZED,
+            message: 'Invalid credentials'
+        })
+    })
 })
