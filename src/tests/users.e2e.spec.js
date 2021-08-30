@@ -39,6 +39,17 @@ describe('Test rout users', () => {
         expect(response.status).toEqual(409)
         expect(response.body).toBeDefined()
     })
+
+    it('Wrong login user', async () => {
+        const response = await request(app)
+            .post('/api/users/login')
+            .set('Accept', 'application.json')
+        expect(response.status).toEqual(401)
+        expect(response.body).toBeDefined()
+    })
+
+
+
     it('Login user', async () => {
         const response = await request(app)
             .post('/api/users/login')
@@ -59,5 +70,4 @@ describe('Test rout users', () => {
         expect(response.body).toBeDefined()
         expect(response.body.data.avatarUrl).toBeDefined()
     })
-    // it('Wrong login user', async () => { })
 })
