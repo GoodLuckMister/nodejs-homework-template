@@ -57,7 +57,7 @@ describe('Test rout users', () => {
             .attach('avatar', buf, 'avatar.jpg')
         expect(response.status).toEqual(200)
         expect(response.body).toBeDefined()
-        expect(response.body.data.avatarUrl).toEqual('avatarUrl')
+        expect(response.body.data.avatarUrl).toBeDefined()
     })
     // it('Wrong login user', async () => { })
 })

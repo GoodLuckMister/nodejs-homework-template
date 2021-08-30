@@ -1,7 +1,7 @@
 const ContactService = require('./contacts')
 const AuthService = require('./auth')
 const UserService = require('./user')
-const UploadAvatarService = require('./cloud-upload')
+const UploadAvatarService = require('./local-upload')
 
 
 module.exports = {

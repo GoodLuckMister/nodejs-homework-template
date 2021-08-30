@@ -56,7 +56,7 @@ describe('Test rout contacts', () => {
             expect(response.status).toEqual(404)
             expect(response.body).toBeDefined()
         })
-        it('should return status 404 get contact wrong id', async () => { })
+
     })
     describe('POST request', () => {
         it('should return status 201 create contact', async () => {
