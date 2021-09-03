@@ -5,6 +5,9 @@ module.exports = {
     node: true,
     'jest/globals': true,
   },
+  plugins: [
+    "@babel/plugin-proposal-private-methods",
+  ],
   extends: [
     'standard',
     "plugin:json/recommended",
