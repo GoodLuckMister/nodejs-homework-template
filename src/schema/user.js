@@ -52,7 +52,7 @@ const userSchema = new Schema({
     },
     verifyToken: {
         type: String,
-        required: true,
+        required: [true, 'Verify token is required'],
         default: nanoid()
     }
 
