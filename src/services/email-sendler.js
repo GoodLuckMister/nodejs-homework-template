@@ -2,10 +2,11 @@ const nodemailer = require('nodemailer')
 const sgMail = require('@sendgrid/mail')
 require('dotenv').config()
 
+
 class CreateSenderSendGrid {
     async send(msg) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-        return await sgMail.send({ ...msg, from: 'paet14@mata.ua' })
+        return await sgMail.send({ ...msg, from: 'paet14@meta.ua' })
     }
 }
 

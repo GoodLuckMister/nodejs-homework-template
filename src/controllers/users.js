@@ -6,7 +6,9 @@ const { AuthService,
     UserService,
     UploadAvatarService,
     EmailService,
-    CreateSenderNodemailer } = require('../services')
+    CreateSenderNodemailer,
+    CreateSenderSendGrid
+} = require('../services')
 const { UsersRepository } = require('../repository')
 const { HttpCode } = require('../helpers/constants')
 
@@ -37,7 +39,7 @@ const reg = async (req, res, next) => {
         const newUser = await serviceUser.create({ name, email, password, subscription })
 
         try {
-            const emailService = new EmailService(process.env.NODE_ENV, new CreateSenderNodemailer())
+            const emailService = new EmailService(process.env.NODE_ENV, new CreateSenderSendGrid())
             await emailService.sendVerifyEmail(newUser.verifyToken, newUser.email, newUser.name)
 
         } catch (e) {
