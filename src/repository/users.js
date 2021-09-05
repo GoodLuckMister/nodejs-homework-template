@@ -15,6 +15,11 @@ class UsersRepository {
         return result
     }
 
+    async findByVerifyToken(verifyToken) {
+        const result = await this.Model.findOne({ verifyToken })
+        return result
+    }
+
     async create(body) {
         const user = new this.Model(body)
         return user.save()
@@ -22,6 +27,10 @@ class UsersRepository {
 
     async updateToken(id, token) {
         await this.Model.updateOne({ _id: id }, { token })
+    }
+
+    async updateTokenVerify(id, isVerified, verifyToken) {
+        await this.Model.updateOne({ _id: id }, { isVerified, verifyToken })
     }
 
     async updateSubscription(id, body) {
