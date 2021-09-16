@@ -6,13 +6,13 @@ class EmailService {
         this.sender = sender
         switch (env) {
             case 'development':
-                this.link = 'https://26c7-185-209-58-177.ngrok.io'
+                this.link = 'https://2f8e-185-209-58-177.ngrok.io'
                 break
             case 'production':
-                this.link = 'link production'
+                this.link = process.env.LINK_THIS_APP
                 break
             default:
-                this.link = 'https://26c7-185-209-58-177.ngrok.io '
+                this.link = 'https://2f8e-185-209-58-177.ngrok.io'
                 break
         }
     }
@@ -31,7 +31,7 @@ class EmailService {
                 action: {
                     instructions: 'To get started with Alexey, please click here:',
                     button: {
-                        color: '#22BC66', // Optional action button color
+                        color: '#22BC66',
                         text: 'Confirm your account',
                         link: `${this.link}/api/users/verify/${verifyToken}`
                     }
