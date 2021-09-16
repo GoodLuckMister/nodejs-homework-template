@@ -16,6 +16,7 @@ class EmailService {
                 break
         }
     }
+
     #createTemplateVerificationEmail(verifyToken, name) {
         const mailGenerator = new Mailgen({
             theme: 'cerberus',
@@ -41,6 +42,7 @@ class EmailService {
         }
         return mailGenerator.generate(email);
     }
+
     async sendVerifyEmail(verifyToken, email, name) {
         const emailHtml = this.#createTemplateVerificationEmail(verifyToken, name)
         const msg = {

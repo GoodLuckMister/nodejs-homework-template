@@ -5,14 +5,12 @@ module.exports = {
     node: true,
     'jest/globals': true,
   },
-  plugins: [
-    "@babel/plugin-proposal-private-methods",
-  ],
   extends: [
     'standard',
     "plugin:json/recommended",
     "plugin:jest/recommended",
     'prettier'],
+  parser: "babel-eslint",
   parserOptions: {
     ecmaVersion: 12,
   },

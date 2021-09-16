@@ -1,5 +1,5 @@
 const fs = require('fs/promises')
-const path = require('path')
+// const path = require('path')
 
 
 const { AuthService,
@@ -19,8 +19,8 @@ const serviceUser = new UserService()
 const serviceAuth = new AuthService()
 
 
-const STATIC_OF_USERS = process.env.STATIC_OF_USERS
-const AVATARS = process.env.AVATARS
+// const STATIC_OF_USERS = process.env.STATIC_OF_USERS
+// const AVATARS = process.env.AVATARS
 
 
 
