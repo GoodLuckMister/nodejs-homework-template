@@ -149,31 +149,31 @@ const updateSubscription = async (req, res, next) => {
 }
 
 
-const avatars = async (req, res, next) => {
-    try {
-        const id = req.user.id
-        const uploads = new UploadAvatarService(path.join(STATIC_OF_USERS, AVATARS))
-        const avatarUrl = await uploads.saveAvatar({ idUser: id, file: req.file })
-        try {
-            await fs.unlink(path.join(STATIC_OF_USERS, AVATARS, req.user.avatar))
-        } catch (e) {
-            console.log(e.message)
-        }
-        await new UsersRepository().updateAvatar(id, avatarUrl)
-        res.json({
-            status: 'success',
-            code: HttpCode.OK,
-            data: {
-                avatarUrl
-            }
-        })
-    } catch (error) {
-        next(error)
-    }
+// const avatars = async (req, res, next) => {
+//     try {
+//         const id = req.user.id
+//         const uploads = new UploadAvatarService(path.join(STATIC_OF_USERS, AVATARS))
+//         const avatarUrl = await uploads.saveAvatar({ idUser: id, file: req.file })
+//         try {
+//             await fs.unlink(path.join(STATIC_OF_USERS, AVATARS, req.user.avatar))
+//         } catch (e) {
+//             console.log(e.message)
+//         }
+//         await new UsersRepository().updateAvatar(id, avatarUrl)
+//         res.json({
+//             status: 'success',
+//             code: HttpCode.OK,
+//             data: {
+//                 avatarUrl
+//             }
+//         })
+//     } catch (error) {
+//         next(error)
+//     }
 
-}
+// }
 
-/* Cloudinary avatars
+
 const avatars = async (req, res, next) => {
     try {
         const id = req.user.id
@@ -196,7 +196,7 @@ const avatars = async (req, res, next) => {
     }
 
 }
-*/
+
 const verify = async (req, res, next) => {
     try {
 
